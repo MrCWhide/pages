@@ -1,0 +1,63 @@
+---
+const cryptoAddresses = {
+  USDT: "0x59a726df7fa579ee69fcb82d4d9110ff311d8ab6",
+  BTC: "3BVXS3r8kpoRVnoPUnUgmrfmnJFXBa9VUH",
+  DOGE: "A78D2YBgeZkRthYLNSMeRU9fTDzvnRH5wi"
+};
+---
+
+<div class="sponsor-wrapper">
+  <!-- 图标容器 -->
+  <div class="crypto-grid">
+    <button class="payment-icon" onclick="toggleModal('wechat')">
+      <svg class="icon wechat"><!-- 微信SVG代码 --></svg>
+    </button>
+    <button class="payment-icon" onclick="toggleModal('alipay')">
+      <svg class="icon alipay"><!-- 支付宝SVG代码 --></svg>
+    </button>
+    <button class="payment-icon crypto" 
+            data-clipboard-text="${cryptoAddresses.USDT}">
+      <img src="/images/usdt.png" alt="USDT (Ethereum)" />
+    </button>
+    <button class="payment-icon crypto"
+            data-clipboard-text="${cryptoAddresses.Bitcoin}">
+            <img src="/images/bitcoin.png" alt="Bitcoin" />
+    </button>
+    <button class="payment-icon crypto"
+            data-clipboard-text="${cryptoAddresses.DOGE}">
+            <img src="/images/doge.png" alt="DOGE" />
+    </button>
+    <!-- 其他加密货币按钮 -->
+  </div>
+
+  <!-- 浮动模态框 -->
+  <dialog id="qr-modal" class="glassmorphism">
+    <img id="qr-image" src="" alt="QR Code" />
+    <button onclick="document.getElementById('qr-modal').close()" 
+            class="close-button">×</button>
+  </dialog>
+</div>
+
+<style>
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .crypto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 1rem;
+  }
+</style>
+
+<script>
+  function toggleModal(type) {
+    const modal = document.getElementById('qr-modal');
+    const qrImg = document.getElementById('qr-image');
+    qrImg.src = `/images/qrcodes/${type}.png`;
+    modal.showModal();
+  }
+</script>

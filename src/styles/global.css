@@ -3,8 +3,7 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
-:root {
+ :root {
   --accent: #2337ff;
   --accent-dark: #000d8a;
   --black: 15, 18, 25;
@@ -14,7 +13,61 @@
   --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --box-shadow: 0 2px 6px rgba(var(--gray), 25%),
     0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+  --apple-radius: 20px;
+  --apple-blur: saturate(180%) blur(20px);
+  --gradient-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu;
+}
+
+.payment-icon {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: var(--apple-radius);
+  background: var(--gradient-primary);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.payment-icon:hover {
+  transform: scale(1.08);
+}
+
+/* 加密货币图标特殊样式 */
+.crypto img {
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.crypto:hover img {
+  filter: none;
+}
+.crypto {
+  position: relative;
+}
+
+.crypto::after {
+  content: attr(alt);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.crypto:hover::after {
+  opacity: 1;
+}
+
 @font-face {
   font-family: "Atkinson";
   src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -29,6 +82,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 body {
   font-family: "Atkinson", sans-serif;
   margin: 0;
@@ -126,12 +180,24 @@ hr {
   border: none;
   border-top: 1px solid rgb(var(--gray-light));
 }
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   body {
     font-size: 18px;
   }
   main {
     padding: 1em;
+  }
+  .sticky-nav {
+    padding: 0 15px;
+  }
+  
+  .nav-inner {
+    flex-wrap: wrap;
+  }
+  
+  .sponsor-wrapper {
+    order: 1;
+    width: 100%;
   }
 }
 
